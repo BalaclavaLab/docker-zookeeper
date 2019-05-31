@@ -35,6 +35,9 @@ fi
 
 # Write myid only if it doesn't exist
 if [[ ! -f "$ZOO_DATA_DIR/myid" ]]; then
+    if [[ -z ${ZOO_MY_ID} ]]; then
+        ZOO_MY_ID=$((${HOSTNAME##*-}+1))
+    fi
     echo "${ZOO_MY_ID:-1}" > "$ZOO_DATA_DIR/myid"
 fi
 
